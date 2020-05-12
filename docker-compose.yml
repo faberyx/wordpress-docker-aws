@@ -7,10 +7,10 @@ services:
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: wordpress.cmimzo2ep7xd.us-east-1.rds.amazonaws.com 
-      WORDPRESS_DB_USER: wordpressAdmin
-      WORDPRESS_DB_PASSWORD: $$asdasd123
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_HOST: $WP_DB_HOST 
+      WORDPRESS_DB_USER: $WP_DB_USER
+      WORDPRESS_DB_PASSWORD: $WP_DB_PASSWORD
+      WORDPRESS_DB_NAME: $WP_DB_NAME
     volumes:
       - wordpress:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -19,5 +19,5 @@ volumes:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=fs-26529ba5.efs.us-east-1.amazonaws.com,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport
-      device: "fs-26529ba5.efs.us-east-1.amazonaws.com:/"
+      o: addr=$NFS_DNS,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport
+      device: "${NFS_DNS}:/"
